@@ -30,7 +30,7 @@ class LighttpdTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->server = new Lighttpd($this->getProject(), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions());
+        $this->server = new Lighttpd($this->getProject(), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions(), new \Symfttpd\Loader(), new \Symfttpd\Writer());
     }
 
     public function tearDown()
@@ -111,7 +111,7 @@ class LighttpdTest extends \PHPUnit_Framework_TestCase
         $this->server->generateRules($this->getMock('\Symfttpd\Configuration\SymfttpdConfiguration'));
         $this->server->writeRules(true);
 
-        $lighttpd = new Lighttpd($this->getProject(false), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions());
+        $lighttpd = new Lighttpd($this->getProject(false), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions(), new \Symfttpd\Loader(), new \Symfttpd\Writer());
         $this->assertEquals($this->getGeneratedRules(), $lighttpd->readRules());
     }
 
@@ -120,7 +120,7 @@ class LighttpdTest extends \PHPUnit_Framework_TestCase
         $this->server->generateConfiguration($this->getSymfttpdConfiguration());
         $this->server->writeConfiguration(true);
 
-        $lighttpd = new Lighttpd($this->getProject(false), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions());
+        $lighttpd = new Lighttpd($this->getProject(false), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions(), new \Symfttpd\Loader(), new \Symfttpd\Writer());
         $this->assertEquals($this->getGeneratedConfiguration(), $lighttpd->readConfiguration());
     }
 
@@ -129,7 +129,7 @@ class LighttpdTest extends \PHPUnit_Framework_TestCase
         $this->server->generate($this->getSymfttpdConfiguration());
         $this->server->write('all', true);
 
-        $lighttpd = new Lighttpd($this->getProject(false), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions());
+        $lighttpd = new Lighttpd($this->getProject(false), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions(), new \Symfttpd\Loader(), new \Symfttpd\Writer());
         $this->assertEquals($this->getGeneratedConfiguration(true), $lighttpd->readConfiguration());
         $this->assertEquals($this->getGeneratedRules(), $lighttpd->readRules());
         $this->assertEquals($this->getGeneratedConfiguration(true) . PHP_EOL . $this->getGeneratedRules(), $lighttpd->read());
@@ -140,7 +140,7 @@ class LighttpdTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadRulesFromFileException()
     {
-        $lighttpd = new Lighttpd($this->getProject(), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions());;
+        $lighttpd = new Lighttpd($this->getProject(), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions(), new \Symfttpd\Loader(), new \Symfttpd\Writer());
         $lighttpd->rotate(true);
         $lighttpd->readRules();
     }
@@ -150,7 +150,7 @@ class LighttpdTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfigFromFileException()
     {
-        $lighttpd = new Lighttpd($this->getProject(), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions());;
+        $lighttpd = new Lighttpd($this->getProject(), $this->getRenderer(), new \Evenement\EventEmitter(), $this->getOptions(), new \Symfttpd\Loader(), new \Symfttpd\Writer());
         $lighttpd->rotate();
         $lighttpd->readConfiguration();
     }

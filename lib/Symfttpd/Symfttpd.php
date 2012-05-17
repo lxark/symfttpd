@@ -62,7 +62,14 @@ class Symfttpd extends \Pimple
                 throw new \InvalidArgumentException(sprintf('"%s" is not supported.', $type));
             }
 
-            $server = new $class($container['project'], $container['renderer'], $container['emitter'], new OptionBag());
+            $server = new $class(
+                $container['project'],
+                $container['renderer'],
+                $container['emitter'],
+                new OptionBag(),
+                $container['loader'],
+                $container['writer']
+            );
 
             // BC with the 1.0 configuration version
             if ($server instanceof \Symfttpd\Server\Lighttpd && $config->has('lighttpd_cmd')) {
@@ -91,6 +98,14 @@ class Symfttpd extends \Pimple
 
         $this['emitter'] = $this->share(function ($c) use ($container) {
             return new \Evenement\EventEmitter2();
+        });
+
+        $this['loader'] = $this->share(function ($c) use ($container) {
+            return new Loader();
+        });
+
+        $this['writer'] = $this->share(function ($c) use ($container) {
+            return new Writer();
         });
     }
 

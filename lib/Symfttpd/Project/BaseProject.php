@@ -89,8 +89,6 @@ abstract class BaseProject implements ProjectInterface
         $this->readablePhpFiles = $options->get('project_readable_phpfiles', array('index.php'));
 
         $this->options = $options;
-
-        $this->emitter->on('project.scan', array($this, 'scan'));
     }
 
     /**
@@ -116,6 +114,10 @@ abstract class BaseProject implements ProjectInterface
                 }
             }
         }
+
+        array_unique($this->readableDirs);
+        array_unique($this->readableFiles);
+        array_unique($this->readablePhpFiles);
 
         sort($this->readableDirs);
         sort($this->readableFiles);

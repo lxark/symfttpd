@@ -17,6 +17,8 @@ use Symfttpd\Project\ProjectInterface;
 use Symfttpd\Renderer\TwigRenderer;
 use Evenement\EventEmitter;
 use Symfttpd\OptionBag;
+use Symfttpd\Loader;
+use Symfttpd\Writer;
 
 /**
  * ServerInterface interface
@@ -28,12 +30,14 @@ interface ServerInterface
     /**
      * Server constructor.
      *
-     * @param ProjectInterface $project
-     * @param TwigRenderer $renderer
-     * @param EventEmitter $emitter
-     * @param OptionBag $options
+     * @param \Symfttpd\Project\ProjectInterface $project
+     * @param \Symfttpd\Renderer\TwigRenderer $renderer
+     * @param \Evenement\EventEmitter $emitter
+     * @param \Symfttpd\OptionBag $options
+     * @param \Symfttpd\Loader $loader
+     * @param \Symfttpd\Writer $writer
      */
-    public function __construct(ProjectInterface $project, TwigRenderer $renderer, EventEmitter $emitter, OptionBag $options);
+    public function __construct(ProjectInterface $project, TwigRenderer $renderer, EventEmitter $emitter, OptionBag $options, Loader $loader, Writer $writer);
 
     /**
      * Set up the options of the server.
