@@ -23,6 +23,7 @@ use Symfttpd\Configuration\SymfttpdConfiguration;
 use Symfttpd\Configuration\Exception\ConfigurationException;
 use Symfttpd\Exception\ExecutableNotFoundException;
 use Symfony\Component\Process\ExecutableFinder;
+use Evenement\EventEmitter;
 
 /**
  * Lighttpd class
@@ -109,16 +110,18 @@ class Lighttpd implements ServerInterface
     /**
      * Constructor class
      *
-     * @param null $workingDir
-     * @param null|\Symfttpd\OptionBag $options
+     * @param \Symfttpd\Project\ProjectInterface $project
+     * @param \Symfttpd\Renderer\TwigRenderer $renderer
+     * @param \Evenement\EventEmitter $emitter
+     * @param \Symfttpd\OptionBag $options
      */
-    public function __construct(ProjectInterface $project, TwigRenderer $renderer, OptionBag $options = null)
+    public function __construct(ProjectInterface $project, TwigRenderer $renderer, EventEmitter $emitter, OptionBag $options)
     {
         $this->project  = $project;
         $this->renderer = $renderer;
-        $this->options  = $options ?: new OptionBag();
+        $this->options  = $options;
 
-        // @todo thinking about injection... Pimple ?
+        // @todo is this necessary ?
         $this->loader = new Loader();
         $this->writer = new Writer();
 

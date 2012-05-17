@@ -11,6 +11,9 @@
 
 namespace Symfttpd\Project;
 
+use Symfttpd\OptionBag;
+use Evenement\EventEmitter;
+
 /**
  * ProjectInterface interface
  *
@@ -18,6 +21,15 @@ namespace Symfttpd\Project;
  */
 interface ProjectInterface
 {
+    /**
+     * Project constructor.
+     *
+     * @param \Symfttpd\OptionBag $options
+     * @param \Evenement\EventEmitter $emitter
+     * @param null $path
+     */
+    public function __construct(OptionBag $options, EventEmitter $emitter, $path = null);
+
     /**
      * @abstract
      * @return mixed

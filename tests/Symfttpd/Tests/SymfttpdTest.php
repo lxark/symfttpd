@@ -52,7 +52,7 @@ class SymfttpdTest extends \PHPUnit_Framework_TestCase
             'server_type' => 'lighttpd'
         ));
 
-        $project = $this->getMock('\\Symfttpd\\Project\\Symfony1', array(), array(new \Symfttpd\OptionBag()));
+        $project = $this->getMock('\\Symfttpd\\Project\\Symfony1', array(), array(new \Symfttpd\OptionBag(), new \Evenement\EventEmitter()));
         $this->symfttpd['project'] = $project;
 
         $this->assertInstanceof('Symfttpd\\Server\\ServerInterface', $this->symfttpd->getServer());

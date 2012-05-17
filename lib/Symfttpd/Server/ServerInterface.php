@@ -13,6 +13,10 @@ namespace Symfttpd\Server;
 
 use Symfttpd\Configuration\SymfttpdConfiguration;
 use Symfttpd\Configuration\Exception\ConfigurationException;
+use Symfttpd\Project\ProjectInterface;
+use Symfttpd\Renderer\TwigRenderer;
+use Evenement\EventEmitter;
+use Symfttpd\OptionBag;
 
 /**
  * ServerInterface interface
@@ -21,6 +25,16 @@ use Symfttpd\Configuration\Exception\ConfigurationException;
  */
 interface ServerInterface
 {
+    /**
+     * Server constructor.
+     *
+     * @param ProjectInterface $project
+     * @param TwigRenderer $renderer
+     * @param EventEmitter $emitter
+     * @param OptionBag $options
+     */
+    public function __construct(ProjectInterface $project, TwigRenderer $renderer, EventEmitter $emitter, OptionBag $options);
+
     /**
      * Set up the options of the server.
      *

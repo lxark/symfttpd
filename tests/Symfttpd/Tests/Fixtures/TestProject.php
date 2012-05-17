@@ -24,7 +24,7 @@ class TestProject extends \Symfttpd\Project\BaseProject
 
     protected $filesystem;
 
-    public function __construct(\Symfttpd\OptionBag $options, $path = null)
+    public function __construct(\Symfttpd\OptionBag $options, \Evenement\EventEmitter $emitter, $path = null)
     {
         if (null == $path) {
             $path = sys_get_temp_dir().'/symfttpd-project-test';
@@ -32,7 +32,7 @@ class TestProject extends \Symfttpd\Project\BaseProject
 
         $this->filesystem = new \Symfttpd\Filesystem\Filesystem();
 
-        parent::__construct($options, $path);
+        parent::__construct($options, new \Evenement\EventEmitter(), $path);
 
         $this->buildProject();
     }

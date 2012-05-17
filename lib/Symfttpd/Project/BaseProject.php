@@ -74,8 +74,14 @@ abstract class BaseProject implements ProjectInterface
      */
     protected $options;
 
-    public function __construct(\Symfttpd\OptionBag $options, $path = null)
+    /**
+     * @param \Symfttpd\OptionBag $options
+     * @param \Evenement\EventEmitter $emitter
+     * @param null $path
+     */
+    public function __construct(\Symfttpd\OptionBag $options, \Evenement\EventEmitter $emitter, $path = null)
     {
+        $this->emitter = $emitter;
         $this->rootDir = $path;
 
         $this->readableDirs = $options->get('project_readable_dirs', array());
