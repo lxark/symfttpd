@@ -89,13 +89,15 @@ abstract class BaseProject implements ProjectInterface
         $this->readablePhpFiles = $options->get('project_readable_phpfiles', array('index.php'));
 
         $this->options = $options;
+
+        $this->emitter->on('project.scan', array($this, 'scan'));
     }
 
     /**
-     * Initialize readable files, dirs and php executable files
-     * as index.php.
+     * Scan the web directory.
+     * It stores the readable
      */
-    public function initialize()
+    public function scan()
     {
         $iterator = new \DirectoryIterator($this->getWebDir());
 

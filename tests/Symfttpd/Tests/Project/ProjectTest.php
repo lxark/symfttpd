@@ -26,7 +26,7 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
     public function testInitialize($options, $values)
     {
         $project = new \Symfttpd\Tests\Fixtures\TestProject(new \Symfttpd\OptionBag($options), new \Evenement\EventEmitter());
-        $project->initialize();
+        $project->scan();
         $this->assertEquals($values['dirs'], $project->readableDirs);
         $this->assertEquals($values['files'], $project->readableFiles);
         $this->assertEquals($values['php'], $project->readablePhpFiles);

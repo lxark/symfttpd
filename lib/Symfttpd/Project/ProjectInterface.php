@@ -34,7 +34,7 @@ interface ProjectInterface
      * @abstract
      * @return mixed
      */
-    public function initialize();
+    public function scan();
 
     /**
      * Return the project name.

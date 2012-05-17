@@ -32,6 +32,33 @@ use Evenement\EventEmitter;
  */
 class Lighttpd implements ServerInterface
 {
+    /**
+     * @var \Symfttpd\Project\ProjectInterface
+     */
+    public $project;
+
+    /**
+     * @var \Symfttpd\Renderer\TwigRenderer
+     */
+    public $renderer;
+
+    /**
+     * @var \Evenement\EventEmitter
+     */
+    public $emitter;
+
+    /**
+     * The collection of configuration options.
+     *
+     * @var \Symfttpd\OptionBag
+     */
+    public $options;
+
+    /**
+     * Server name.
+     *
+     * @var string
+     */
     public $name = 'lighttpd';
 
     /**
@@ -91,23 +118,6 @@ class Lighttpd implements ServerInterface
     protected $workingDir;
 
     /**
-     * The collection of configuration options.
-     *
-     * @var OptionBag
-     */
-    public $options;
-
-    /**
-     * @var ProjectInterface
-     */
-    public $project;
-
-    /**
-     * @var TwigRenderer
-     */
-    public $renderer;
-
-    /**
      * Constructor class
      *
      * @param \Symfttpd\Project\ProjectInterface $project
@@ -120,6 +130,7 @@ class Lighttpd implements ServerInterface
         $this->project  = $project;
         $this->renderer = $renderer;
         $this->options  = $options;
+        $this->emitter  = $emitter;
 
         // @todo is this necessary ?
         $this->loader = new Loader();

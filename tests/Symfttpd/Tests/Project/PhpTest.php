@@ -70,7 +70,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $filesystem->mkdir($baseDir);
         $filesystem->touch($files);
 
-        $this->project->initialize();
+        $this->project->scan();
 
         $this->assertContains('index.php', $this->project->readablePhpFiles);
         $this->assertEmpty($this->project->readableDirs);

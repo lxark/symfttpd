@@ -94,7 +94,7 @@ class Symfony2Test extends \PHPUnit_Framework_TestCase
         $filesystem->touch($files);
 
         $this->project->setRootDir($baseDir);
-        $this->project->initialize();
+        $this->project->scan();
 
         $this->assertContains('index.php', $this->project->readablePhpFiles);
         $this->assertContains('bundles', $this->project->readableDirs);
